@@ -1,0 +1,76 @@
+@using SiteYonetim.Entity.Concrete
+@model List<Dues>
+
+<div class="card shadow mt-4 border-0">
+    <div class="card-header bg-danger text-white d-flex justify-content-between align-items-center">
+        <h3 class="card-title mb-0"><i class="bi bi-cash-coin"></i> Aidat ve Borç Listesi</h3>
+        <a asp-action="AddDues" class="btn btn-light text-danger fw-bold">
+            <i class="bi bi-plus-lg"></i> Yeni Borç Ekle
+        </a>
+        <a href="/Dues/ExportExcel" class="btn btn-success ms-2">
+            <i class="bi bi-file-earmark-excel-fill"></i> Excel'e Aktar
+        </a>
+    </div>
+    <div class="card-body">
+
+        <table class="table table-hover align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>#</th>
+                    <th>Daire Bilgisi</th>
+                    <th>Dönem</th>
+                    <th>Tutar</th>
+                    <th>Durum</th>
+                    <th>İşlemler</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>
+                            <span class="fw-bold">@item.Apartment?.Block?.Name</span>
+                            - Daire @item.Apartment?.ApartmentNumber
+                            <br />
+                            <small class="text-muted">
+                                @(item.Apartment?.User != null ? item.Apartment.User.Name + " " +
+                                                            item.Apartment.User.Surname
+                                                            : "Kişi Yok")
+                            </small>
+                        </td>
+                        <td>@item.Month / @item.Year</td>
+                        <td class="fw-bold">@item.Amount ₺</td>
+                        <td>
+                            @if (item.IsPaid)
+                            {
+                                <span class="badge bg-success"><i class="bi bi-check-circle"></i> Ödendi</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-danger"><i class="bi bi-hourglass-split"></i> Ödenmedi</span>
+                            }
+                        </td>
+                        <td>
+                            @if (!item.IsPaid)
+                            {
+                                <a asp-action="Payment" asp-route-id="@item.Id" class="btn btn-success btn-sm"
+                                    onclick="return confirm('Bu aidatın ödendiğini onaylıyor musunuz?')">
+                                    <i class="bi bi-credit-card"></i> Tahsil Et
+                                </a>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        @if (Model.Count == 0)
+        {
+            <div class="alert alert-warning text-center">
+                Henüz hiç borç kaydı bulunmamaktadır.
+            </div>
+        }
+
+    </div>
+</div>

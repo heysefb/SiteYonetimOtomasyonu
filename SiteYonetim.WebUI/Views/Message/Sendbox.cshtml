@@ -1,0 +1,56 @@
+@using SiteYonetim.Entity.Concrete
+@model List<Message>
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="list-group shadow-sm">
+                <a href="/Message/Inbox" class="list-group-item list-group-item-action border-0">
+                    <i class="bi bi-envelope"></i> Gelen Kutusu
+                </a>
+                <a href="/Message/Sendbox" class="list-group-item list-group-item-action active bg-primary border-0">
+                    <i class="bi bi-send-fill"></i> Giden Kutusu
+                </a>
+                <a href="/Message/SendMessage" class="list-group-item list-group-item-action text-danger fw-bold">
+                    <i class="bi bi-plus-circle"></i> Yeni Mesaj Yaz
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-9">
+            <div class="card shadow border-0">
+                <div class="card-header bg-white">
+                    <h5 class="mb-0 text-primary">Gönderilen Mesajlar</h5>
+                </div>
+                <div class="card-body p-0">
+                    <table class="table table-hover mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Kime (Alıcı)</th>
+                                <th>Konu</th>
+                                <th>Tarih</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.ReceiverMail</td>
+                                    <td>@item.Subject</td>
+                                    <td>@item.Date.ToShortDateString()</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    @if (Model.Count == 0)
+                    {
+                        <div class="p-4 text-center text-muted">
+                            <i class="bi bi-send fs-1"></i><br>
+                            Henüz kimseye mesaj göndermediniz.
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

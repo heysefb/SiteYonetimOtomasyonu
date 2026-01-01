@@ -1,0 +1,35 @@
+@model SiteYonetim.Entity.Concrete.Block
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            
+            <div class="card shadow border-0">
+                <div class="card-header bg-success text-white">
+                    <h4 class="mb-0"><i class="bi bi-bricks"></i> Yeni Blok Ekle</h4>
+                </div>
+                
+                <div class="card-body p-4">
+                    <form method="post">
+                        
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Blok Adı</label>
+                            <input type="text" asp-for="Name" class="form-control" placeholder="Örn: C Blok" required />
+                        </div>
+
+                        <div class="d-flex justify-content-between mt-4">
+                            <a asp-action="Index" class="btn btn-secondary">
+                                <i class="bi bi-arrow-left"></i> Vazgeç
+                            </a>
+                            <button type="submit" class="btn btn-success px-4">
+                                <i class="bi bi-save"></i> Kaydet
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

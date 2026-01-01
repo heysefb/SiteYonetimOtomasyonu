@@ -1,0 +1,59 @@
+@model SiteYonetim.WebUI.Models.AddApartmentViewModel
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Yeni Daire Ekle</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h3>Yeni Daire Girişi</h3>
+        
+        <form method="post">
+            
+            <div class="mb-3">
+                <label>Blok Seçiniz</label>
+
+                <select asp-for="Apartment.BlockId" asp-items="@Model.BlockList" class="form-control">
+                    <option value="" disabled selected>Lütfen bir blok seçin</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label>Daire Numarası</label>
+                <input type="number" class="form-control" asp-for="Apartment.ApartmentNumber" />
+            </div>
+
+            <div class="mb-3">
+                <label>Kat</label>
+                <input type="number" class="form-control" asp-for="Apartment.Floor" />
+            </div>
+
+            <div class="mb-3">
+                <label>Daire Tipi</label>
+                <input type="text" class="form-control" asp-for="Apartment.Type" placeholder="2+1" />
+            </div>
+
+            <div class="mb-3">
+                <label>Durumu</label>
+                <select class="form-control" asp-for="Apartment.IsOccupied">
+                    <option value="false">Boş</option>
+                    <option value="true">Dolu</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label>Oturan Bilgisi</label>
+                <select class="form-control" asp-for="Apartment.OwnerOrTenant">
+                    <option value="" disabled selected>Seçiniz...</option> <option value="Ev Sahibi">Ev Sahibi</option>
+                    <option value="Kiracı">Kiracı</option>
+                    <option value="Boş">Boş (Kimse Yok)</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Daireyi Kaydet</button>
+        </form>
+    </div>
+</body>
+</html>

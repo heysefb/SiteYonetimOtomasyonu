@@ -1,0 +1,98 @@
+@using SiteYonetim.WebUI.Models
+@model AddApartmentViewModel
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Daire Güncelle</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+</head>
+<body class="bg-light">
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                
+                <div class="card shadow-lg border-0">
+                    
+                    <div class="card-header bg-warning text-dark p-3">
+                        <h4 class="mb-0 fw-bold">
+                            <i class="bi bi-pencil-square"></i> Daire Bilgilerini Güncelle
+                        </h4>
+                    </div>
+
+                    <div class="card-body p-4">
+                        
+                        <form method="post">
+                            
+                            <input type="hidden" asp-for="Apartment.Id" />
+
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold">Blok Seçimi</label>
+                                    <select asp-for="Apartment.BlockId" asp-items="@Model.BlockList" class="form-select">
+                                        <option value="" disabled>Lütfen Seçiniz</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold">Daire Numarası</label>
+                                    <input asp-for="Apartment.ApartmentNumber" type="number" class="form-control" />
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold">Kat</label>
+                                    <input asp-for="Apartment.Floor" type="number" class="form-control" />
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold">Daire Tipi (2+1, 3+1)</label>
+                                    <input asp-for="Apartment.Type" type="text" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Dairede Kim Oturuyor?</label>
+                                    <select asp-for="Apartment.UserId" asp-items="@Model.UserList" class="form-select">
+                                        <option value="">-- Daire Boş --</option>
+                                    </select>
+                                <small class="text-muted">Listeden bir kullanıcı seçerek daireye atayabilirsiniz.</small>
+                            </div>
+
+                            <div class="row mb-3 align-items-center">
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold">Sahibi / Kiracı Adı</label>
+                                    <input asp-for="Apartment.OwnerOrTenant" type="text" class="form-control" />
+                                </div>
+                                
+                                <div class="col-md-6 mt-4">
+                                    <div class="form-check form-switch p-0">
+                                        <div class="d-flex align-items-center gap-2">
+                                            <input class="form-check-input ms-0" type="checkbox" role="switch" id="statusSwitch" asp-for="Apartment.IsOccupied" style="width: 3em; height: 1.5em;">
+                                            <label class="form-check-label fw-bold" for="statusSwitch">Daire Dolu mu?</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr class="my-4">
+
+                            <div class="d-flex justify-content-end gap-2">
+                                <a href="/Apartment/Index" class="btn btn-secondary">
+                                    <i class="bi bi-arrow-left"></i> Listeye Dön
+                                </a>
+                                <button type="submit" class="btn btn-warning fw-bold px-4">
+                                    <i class="bi bi-save"></i> Değişiklikleri Kaydet
+                                </button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+                </div>
+        </div>
+    </div>
+
+</body>
+</html>

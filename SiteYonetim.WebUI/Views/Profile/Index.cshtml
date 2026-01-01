@@ -1,0 +1,46 @@
+@model SiteYonetim.Entity.Concrete.User
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+
+            <div class="card shadow border-0">
+                <div class="card-header bg-primary text-white text-center py-4">
+                    <h1 class="bi bi-person-circle display-4"></h1>
+                    <h3 class="mb-0">Hoş Geldiniz, @Model.Name</h3>
+                    <p class="mb-0 text-white-50">Site Sakini Paneli</p>
+                </div>
+
+                <div class="card-body p-4">
+                    <h5 class="fw-bold text-muted mb-3">Kişisel Bilgileriniz</h5>
+
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>Ad Soyad:</span>
+                            <span class="fw-bold">@Model.Name @Model.Surname</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>Email:</span>
+                            <span>@Model.Email</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>TC No:</span>
+                            <span>@Model.TCNo</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>Araç Plakası:</span>
+                            <span class="badge bg-warning text-dark">@Model.CarPlate</span>
+                        </li>
+                    </ul>
+
+                    <div class="d-grid gap-2 mt-4">
+                        <button class="btn btn-outline-primary">
+                            <i class="bi bi-pencil"></i> Bilgilerimi Güncelle
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

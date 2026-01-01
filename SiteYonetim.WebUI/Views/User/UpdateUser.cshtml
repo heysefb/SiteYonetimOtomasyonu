@@ -1,0 +1,75 @@
+@model SiteYonetim.Entity.Concrete.User
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            
+            <div class="card shadow border-0">
+                <div class="card-header bg-warning text-dark">
+                    <h4 class="mb-0 fw-bold"><i class="bi bi-person-gear"></i> Kullanıcı Bilgilerini Güncelle</h4>
+                </div>
+                
+                <div class="card-body p-4">
+                    <form method="post">
+                        
+                        <input type="hidden" asp-for="Id" />
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold">Ad</label>
+                                <input type="text" asp-for="Name" class="form-control" required />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold">Soyad</label>
+                                <input type="text" asp-for="Surname" class="form-control" required />
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold">TC Kimlik No</label>
+                                <input type="text" asp-for="TCNo" class="form-control" maxlength="11" />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold">Araç Plakası</label>
+                                <input type="text" asp-for="CarPlate" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold">Email Adresi</label>
+                                <input type="email" asp-for="Email" class="form-control" required />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold">Şifre</label>
+                                <input type="text" asp-for="Password" class="form-control" required />
+                                <small class="text-muted">* Şifreyi değiştirmek istemiyorsanız mevcut şifre kalmalı.</small>
+                            </div>
+                        </div>
+
+                        <div class="form-check form-switch mb-4 p-0 ps-5">
+                            <input class="form-check-input ms-0" type="checkbox" role="switch" id="adminSwitch" asp-for="IsAdmin" style="width: 3em; height: 1.5em; margin-left: -2.5em !important;">
+                            <label class="form-check-label fw-bold ps-2" for="adminSwitch">
+                                Yönetici Yetkisi Var mı?
+                            </label>
+                        </div>
+
+                        <hr />
+
+                        <div class="d-flex justify-content-end gap-2">
+                            <a asp-action="Index" class="btn btn-secondary">
+                                <i class="bi bi-arrow-left"></i> Vazgeç
+                            </a>
+                            <button type="submit" class="btn btn-warning px-4 fw-bold">
+                                <i class="bi bi-save"></i> Değişiklikleri Kaydet
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,140 @@
+@{
+    ViewData["Title"] = "Yönetim Paneli";
+}
+
+<div class="container-fluid mt-4">
+
+    <h2 class="mb-4 text-primary fw-bold"><i class="bi bi-speedometer2"></i> Yönetim Paneli Özeti</h2>
+
+    <div class="row mb-4">
+
+        <div class="col-md-3">
+            <div class="card text-white bg-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs fw-bold text-uppercase mb-1">Toplam Daire</div>
+                            <div class="h5 mb-0 fw-bold">@ViewBag.ToplamDaire</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="bi bi-building fs-1 text-white-50"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card text-white bg-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs fw-bold text-uppercase mb-1">Dolu Daire</div>
+                            <div class="h5 mb-0 fw-bold">@ViewBag.DoluDaire</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="bi bi-check-circle fs-1 text-white-50"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card text-white bg-warning text-dark shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs fw-bold text-uppercase mb-1">Kasadaki Para</div>
+                            <div class="h5 mb-0 fw-bold">@ViewBag.Kasa ₺</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="bi bi-cash-stack fs-1 text-black-50"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card text-white bg-danger shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs fw-bold text-uppercase mb-1">Ödenmemiş Borçlar</div>
+                            <div class="h5 mb-0 fw-bold">@ViewBag.Alacak ₺</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="bi bi-exclamation-octagon fs-1 text-white-50"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 fw-bold text-primary">Gelir / Gider Durumu</h6>
+                </div>
+                <div class="card-body">
+                    <div id="piechart" style="width: 100%; height: 300px;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 fw-bold text-primary">Hızlı İşlemler</h6>
+                </div>
+                <div class="card-body">
+                    <a href="/Dues/AddDues" class="btn btn-primary w-100 mb-2 text-start"><i class="bi bi-plus-lg"></i>
+                        Yeni Aidat Ekle</a>
+                    <a href="/User/AddUser" class="btn btn-success w-100 mb-2 text-start"><i
+                            class="bi bi-person-plus"></i> Yeni Üye Kaydet</a>
+                    <a href="/Message/Inbox" class="btn btn-info w-100 mb-2 text-start text-white"><i
+                            class="bi bi-envelope"></i> Mesajları Oku</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+        // C# Verilerini JS'e aktarırken TAM SAYIYA (Int) çeviriyoruz.
+        // Böylece virgül/nokta derdi ortadan kalkıyor.
+        var kasa = @Convert.ToInt32(ViewBag.Kasa);
+        var alacak = @Convert.ToInt32(ViewBag.Alacak);
+
+        // Hata ayıklamak için konsola yazdıralım (F12'ye basıp Console'a bakabilirsin)
+        console.log("Kasa:", kasa);
+        console.log("Alacak:", alacak);
+
+        var data = google.visualization.arrayToDataTable([
+            ['Durum', 'Tutar'],
+            ['Tahsil Edilen', kasa],
+            ['Beklenen (Borç)', alacak]
+        ]);
+
+        var options = {
+            title: 'Gelir / Gider Durumu',
+            pieHole: 0.4, // Ortası delik (Donut) grafik yapar, daha şık durur
+            colors: ['#198754', '#dc3545'], // Yeşil ve Kırmızı
+            chartArea: { width: '90%', height: '80%' }, // Grafiği büyütür
+            legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        chart.draw(data, options);
+    }
+</script>

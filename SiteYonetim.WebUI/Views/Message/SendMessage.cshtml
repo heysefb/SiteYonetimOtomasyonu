@@ -1,0 +1,59 @@
+@model SiteYonetim.Entity.Concrete.Message
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="list-group shadow-sm">
+                <a href="/Message/Inbox" class="list-group-item list-group-item-action border-0">
+                    <i class="bi bi-envelope"></i> Gelen Kutusu
+                </a>
+                <a href="/Message/Sendbox" class="list-group-item list-group-item-action border-0">
+                    <i class="bi bi-send"></i> Giden Kutusu
+                </a>
+                <a href="/Message/SendMessage" class="list-group-item list-group-item-action active bg-danger border-0">
+                    <i class="bi bi-plus-circle-fill"></i> Yeni Mesaj Yaz
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-9">
+            <div class="card shadow border-0">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0"><i class="bi bi-pencil-square"></i> Yeni Mesaj Oluştur</h5>
+                </div>
+                <div class="card-body p-4">
+
+                    <form method="post">
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Alıcı Email</label>
+                            <input type="email" name="ReceiverMail" class="form-control" placeholder="ornek@site.com"
+                                required value="@ViewBag.AliciMail" />
+                            <div class="form-text">Mesajı göndermek istediğiniz kişinin mail adresini yazın.</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Konu</label>
+                            <input type="text" name="Subject" class="form-control"
+                                placeholder="Örn: Çatı Akıntısı Hakkında" required />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Mesajınız</label>
+                            <textarea name="Content" class="form-control" rows="5"
+                                placeholder="Mesajınızı buraya yazın..." required></textarea>
+                        </div>
+
+                        <div class="d-flex justify-content-end">
+                            <button type="submit" class="btn btn-primary px-4">
+                                <i class="bi bi-send-fill"></i> Gönder
+                            </button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
