@@ -1,0 +1,4 @@
+** linguist-vendored
+*.min.js linguist-vendored
+*.min.css linguist-vendored
+*.cshtml linguist-language=C#
