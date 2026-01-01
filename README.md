@@ -22,9 +22,5 @@ Bu proje, ASP.NET Core 5.0/6.0 kullanılarak **N-Katmanlı Mimari (N-Tier Archit
 - **Veritabanı:** MSSQL
 - **Kütüphaneler:** ClosedXML (Excel), Google Charts, FluentValidation
 
-## 📸 Ekran Görüntüleri
-
-**(Buraya az önce bana attığın Dashboard ve Ödeme ekranı resimlerini Github'a yükleyip linklerini koyabilirsin)**
-
 ---
 Developed by [heysefb](https://github.com/heysefb)
